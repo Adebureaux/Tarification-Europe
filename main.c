@@ -38,12 +38,12 @@ int main(int argc, char *argv[])
           zone = calcZone(pays);
       } while (zone <= -1);
       printf("Zone %d\n\n", zone);
-      //
-      // // Tranche poids et poids supplementaire
-      // printf("Nombre de colis : ");
-      // conv_nbrColis = lire(nbrColis, 3);
-      // poidsTranche = calcPoids(conv_nbrColis, &poidsSup);
-      //
+
+      // Tranche poids et poids
+      printf("Nombre de colis : ");
+      conv_nbrColis = lire(nbrColis, 3);
+      poidsTranche = calcPoids(conv_nbrColis);
+
       // // Calcul du tarif
       // prixBase = calcTarif(poidsTranche, poidsSup, zone, conv_nbrColis, fraisDossier);
       // printf("\n\nTarif d'achat : %.2lf Euros\n", prixBase);

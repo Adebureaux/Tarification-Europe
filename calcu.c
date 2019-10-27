@@ -1,15 +1,12 @@
-.....#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "ecriture.h"
 
-int calcPoids(long conv_nbrColis, long *poidsSup)
+int calcPoids(long conv_nbrColis)
 {
     int tranchePoids = 0;
-    char longu[4];
-    char larg[4];
-    char haut[4];
-    char poids[4];
+    char longu[1], larg[1], haut[1], poids[1];
     long conv_longu = 0, conv_larg = 0, conv_haut = 0, conv_poids = 0, compteur = 1;
     double poidsVolume = 0, poidsReel = 0;
     do
@@ -25,7 +22,7 @@ int calcPoids(long conv_nbrColis, long *poidsSup)
         printf("Hauteur (cm) : ");
         conv_haut = lire(haut, 4);
         printf("Poids (kg) : ");
-        conv_poids = lire(poids, 4);
+        conv_poids = lire(poids, 5);
         compteur++;
         poidsVolume = (((conv_longu/100.00)*(conv_larg/100.00)*(conv_haut/100.00))*250.00);
         if (conv_poids < poidsVolume)
@@ -39,15 +36,15 @@ int calcPoids(long conv_nbrColis, long *poidsSup)
     } while (conv_nbrColis >= compteur);
 
     // Definition de la tranche de poids
-    if (poidsReel >= 0 && poidsReel <= 2)
+    if (poidsReel >= 0 && poidsReel < 9)
     {
         tranchePoids = 0;
     }
-    else if (poidsReel >= 3 && poidsReel <= 5)
+    else if (poidsReel >= 9 && poidsReel < 19)
     {
         tranchePoids = 1;
     }
-    else if (poidsReel >= 6 && poidsReel <= 10)
+    else if (poidsReel >= 19 && poidsReel < 29)
     {
         tranchePoids = 2;
     }
