@@ -11,10 +11,9 @@ int main(int argc, char *argv[])
   do
   {
     char *pays[1];
-      // char nbrColis[1];
-      // long conv_nbrColis = 0;
-      // long poidsSup = 0;
-      // int poidsTranche = 0;
+    char nbrColis[1];
+    long conv_nbrColis = 0;
+    int poidsTranche = 0;
     int zone = 0;
       // int fraisDossier = 0;
       // int div = 0;
@@ -34,14 +33,14 @@ int main(int argc, char *argv[])
       do
       {
           printf("Code pays : ");
-          lire(*pays, 4);
+          lire(*pays, 4, 0);
           zone = calcZone(pays);
       } while (zone <= -1);
       printf("Zone %d\n\n", zone);
 
       // Tranche poids et poids
       printf("Nombre de colis : ");
-      conv_nbrColis = lire(nbrColis, 3);
+      conv_nbrColis = lire(nbrColis, 3, 0);
       poidsTranche = calcPoids(conv_nbrColis);
 
       // // Calcul du tarif
@@ -70,7 +69,7 @@ int main(int argc, char *argv[])
       // printf("Marge : %.0lf%%\n\n", marge);
 
       printf("Voulez-vous continuer ? 1 -> OUI 0 -> NON : ");
-      conv_run = lire(run, 2);
+      conv_run = lire(run, 2, 0);
       printf("\n\n\n\n\n");
   } while (conv_run);
 

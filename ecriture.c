@@ -21,7 +21,7 @@ void viderBuffer()
     }
 }
 
-long lire(char *chaine, int longueur)
+long lire(char *chaine, int longueur, int varDouble)
 {
     char *positionEntree = NULL;
     int i = 0;
@@ -41,7 +41,14 @@ long lire(char *chaine, int longueur)
         {
             viderBuffer();
         }
-        return strtol(chaine, NULL, 10);
+        if (varDouble)
+        {
+          return strtod(chaine, NULL);
+        }
+        else
+        {
+          return strtol(chaine, NULL, 10);
+        }
     }
     else
     {

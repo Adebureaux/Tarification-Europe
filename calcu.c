@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "ecriture.h"
 
 int calcPoids(long conv_nbrColis)
@@ -8,7 +9,7 @@ int calcPoids(long conv_nbrColis)
     int tranchePoids = 0;
     char longu[1], larg[1], haut[1], poids[1];
     long conv_longu = 0, conv_larg = 0, conv_haut = 0, conv_poids = 0, compteur = 1;
-    double poidsVolume = 0, poidsReel = 0;
+    double poidsVolume = 0, poidsReel = 0, arrondi = 0;
     do
     {
         if (conv_nbrColis > 1)
@@ -16,13 +17,13 @@ int calcPoids(long conv_nbrColis)
             printf("\nColis %ld\n", compteur);
         }
         printf("Longueur (cm) : ");
-        conv_longu = lire(longu, 4);
+        conv_longu = lire(longu, 4, 1);
         printf("Largeur (cm) : ");
-        conv_larg = lire(larg, 4);
+        conv_larg = lire(larg, 4, 1);
         printf("Hauteur (cm) : ");
-        conv_haut = lire(haut, 4);
+        conv_haut = lire(haut, 4, 1);
         printf("Poids (kg) : ");
-        conv_poids = lire(poids, 5);
+        conv_poids = lire(poids, 5, 1);
         compteur++;
         poidsVolume = (((conv_longu/100.00)*(conv_larg/100.00)*(conv_haut/100.00))*250.00);
         if (conv_poids < poidsVolume)
@@ -35,64 +36,107 @@ int calcPoids(long conv_nbrColis)
         }
     } while (conv_nbrColis >= compteur);
 
+    printf("Var poids reel %f\n", poidsReel);
+
+    if (poidsReel > 100 && poidsReel < 1000)
+    {
+      double l_dblTemp = poidsReel  / 10;
+      int      l_iTemp    = (int) (l_dblTemp);
+      // Arrondi Superieur
+      if ((l_dblTemp - l_iTemp) > 0.1)
+      {
+          poidsReel = (l_iTemp + 1)*100;
+      }
+    }
+    // else if (poidsReel > 1000)
+    // {
+    //   double l_dblTemp = poidsReel  / 100;
+    //   int      l_iTemp    = (int) (l_dblTemp);
+    //   // Arrondi Superieur
+    //   if ((l_dblTemp - l_iTemp) > 0.1)
+    //   {
+    //       poidsReel = (l_iTemp + 1)*100;
+    //   }
+    // }
+
+
+    printf("Var poids reel %f\n", poidsReel);
+
     // Definition de la tranche de poids
-    if (poidsReel >= 0 && poidsReel < 9)
+    if (poidsReel >= 0 && poidsReel <= 9)
     {
         tranchePoids = 0;
     }
-    else if (poidsReel >= 9 && poidsReel < 19)
+    else if (poidsReel > 9 && poidsReel <= 19)
     {
         tranchePoids = 1;
     }
-    else if (poidsReel >= 19 && poidsReel < 29)
+    else if (poidsReel > 19 && poidsReel <= 29)
     {
         tranchePoids = 2;
     }
-    else if (poidsReel >= 11 && poidsReel <= 15)
+    else if (poidsReel > 29 && poidsReel <= 39)
     {
         tranchePoids = 3;
     }
-    else if (poidsReel >= 16 && poidsReel <= 20)
+    else if (poidsReel > 39 && poidsReel <= 49)
     {
         tranchePoids = 4;
     }
-    else if (poidsReel >= 21 && poidsReel <= 30)
+    else if (poidsReel > 49 && poidsReel <= 59)
     {
         tranchePoids = 5;
     }
-    else if (poidsReel >= 31 && poidsReel <= 40)
+    else if (poidsReel > 59 && poidsReel <= 69)
     {
         tranchePoids = 6;
     }
-    else if (poidsReel >= 41 && poidsReel <= 50)
+    else if (poidsReel > 69 && poidsReel <= 79)
     {
         tranchePoids = 7;
     }
-    else if (poidsReel >= 51 && poidsReel <= 60)
+    else if (poidsReel > 79 && poidsReel <= 89)
     {
         tranchePoids = 8;
     }
-    else if (poidsReel >= 61 && poidsReel <= 70)
+    else if (poidsReel > 89 && poidsReel <= 99)
     {
         tranchePoids = 9;
     }
-    else if (poidsReel >= 71 && poidsReel <= 80)
+    else if (poidsReel > 99 && poidsReel <= 200)
     {
         tranchePoids = 10;
     }
-    else if (poidsReel >= 81 && poidsReel <= 90)
+    else if (poidsReel > 200 && poidsReel <= 300)
     {
         tranchePoids = 11;
     }
-    else if (poidsReel >= 91 && poidsReel <= 100)
+    else if (poidsReel > 300 && poidsReel <= 400)
     {
         tranchePoids = 12;
+    }
+    else if (poidsReel > 400 && poidsReel <= 500)
+    {
+        tranchePoids = 13;
+    }
+    else if (poidsReel > 500 && poidsReel <= 1000)
+    {
+        tranchePoids = 14;
+    }
+    else if (poidsReel > 1000 && poidsReel <= 2000)
+    {
+        tranchePoids = 15;
+    }
+    else if (poidsReel > 2000)
+    {
+        tranchePoids = 16;
     }
     else
     {
-        tranchePoids = 12;
-        *poidsSup = poidsReel - 100;
+        printf("Erreur sur le poids.\n");
+        return 0;
     }
+    printf("Tranche poids %d\n", tranchePoids); // A delete
     return tranchePoids;
 }
 
@@ -121,7 +165,7 @@ double calcTarif(int poidsTranche, int zone)
     const double tablePrix[33][17] = {
     { 43.77, 47.04, 50.30, 53.57, 56.82, 60.09, 63.36, 66.61, 69.88, 76.69, 76.69, 66.47, 59.90, 54.96, 54.61, 47.83, 41.40 },
     { 36.59, 46.76, 57.60, 67.13, 76.06, 80.34, 94.69, 103.51, 113.21, 125.51, 115.85, 104.45, 97.40, 93.59, 88.56, 76.79, 73.20},
-    { 60.1571.05, 81.94, 92.83, 103.72, 114.59, 125.48, 136.37, 147.27, 158.16, 143.58, 121.55, 111.56, 105.63, 94.93, 79.06, 75.12 },
+    { 60.15, 71.05, 81.94, 92.83, 103.72, 114.59, 125.48, 136.37, 147.27, 158.16, 143.58, 121.55, 111.56, 105.63, 94.93, 79.06, 75.12 },
     { 32.32, 36.54, 40.76, 44.98, 49.20, 53.43, 57.66, 61.89, 66.11, 70.32, 60.39, 50.77, 43.08, 37.63, 35.56, 30.59, 26.02 },
     { 126.50, 127.93, 130.42, 132.47, 134.31, 168.55, 169.58, 170.59, 171.62, 172.54, 181.95, 152.50, 137.57, 127.70, 110.20, 99.42, 99.36 },
     { 130.06, 132.92, 135.52, 138.63, 141.98, 158.64, 161.39, 164.11, 166.86, 169.64, 163.30, 137.97, 121.31, 111.57, 93.51, 82.64, 82.60 },
