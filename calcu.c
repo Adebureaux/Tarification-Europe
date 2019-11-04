@@ -4,12 +4,12 @@
 #include <math.h>
 #include "ecriture.h"
 
-int calcPoids(long conv_nbrColis)
+int calcPoids(long conv_nbrColis, double *multiplier)
 {
     int tranchePoids = 0;
     char longu[1], larg[1], haut[1], poids[1];
     long conv_longu = 0, conv_larg = 0, conv_haut = 0, conv_poids = 0, compteur = 1;
-    double poidsVolume = 0, poidsReel = 0, arrondi = 0;
+    double poidsVolume = 0, poidsReel = 0, tempPoids = 0;
     do
     {
         if (conv_nbrColis > 1)
@@ -38,26 +38,16 @@ int calcPoids(long conv_nbrColis)
 
     printf("Var poids reel %f\n", poidsReel);
 
-    if (poidsReel > 100 && poidsReel < 1000)
+    if (poidsReel > 100)
     {
-      double l_dblTemp = poidsReel  / 10;
-      int      l_iTemp    = (int) (l_dblTemp);
-      // Arrondi Superieur
-      if ((l_dblTemp - l_iTemp) > 0.1)
-      {
-          poidsReel = (l_iTemp + 1)*100;
-      }
+      tempPoids = ceil(poidsReel / 10.00);
+      poidsReel = tempPoids * 10;
+      *multiplier =  tempPoids / 10.00;
     }
-    // else if (poidsReel > 1000)
-    // {
-    //   double l_dblTemp = poidsReel  / 100;
-    //   int      l_iTemp    = (int) (l_dblTemp);
-    //   // Arrondi Superieur
-    //   if ((l_dblTemp - l_iTemp) > 0.1)
-    //   {
-    //       poidsReel = (l_iTemp + 1)*100;
-    //   }
-    // }
+    else
+    {
+      *multiplier = 1;
+    }
 
 
     printf("Var poids reel %f\n", poidsReel);
@@ -144,7 +134,7 @@ int calcZone(char *pays[1])
 {
   int zone = -1;
   int i = 0;
-  char *zonePays[33] = { "ALL", "AND", "AUT", "BEL", "BOS", "BUL", "CRO", "DAN", "ESP", "EST", "FIN", "HON", "IRL", "ITA", "KOS", "LET", "LIE", "LIT", "LUX", "MAC", "MON", "NOR", "PAY", "POL", "POR", "REP", "ROU", "ANG", "ECO", "SER", "SLO", "SUE", "SUI" };
+  const char *zonePays[33] = { "ALL", "AND", "AUT", "BEL", "BOS", "BUL", "CRO", "DAN", "ESP", "EST", "FIN", "HON", "IRL", "ITA", "KOS", "LET", "LIE", "LIT", "LUX", "MAC", "MON", "NOR", "PAY", "POL", "POR", "REP", "ROU", "ANG", "ECO", "SER", "SLO", "SUE", "SUI" };
   for (i = 0; i < 32; i++)
   {
     if (strncmp(pays[0], zonePays[i], 3) == 0)
@@ -154,13 +144,14 @@ int calcZone(char *pays[1])
   }
   if (zone <= -1)
   {
-    printf("Erreur de saisie du code pays, veuillez ressaisir\n");
+    printf("Erreur dans la saisie du code pays, veuillez saisir les 3 premieres lettres.\n");
   }
   return zone;
 }
 
-double calcTarif(int poidsTranche, int zone)
+double calcTarif(int poidsTranche, int zone, double multiplier)
 {
+    const double tgo = 1.13;
     double prixBase = 0;
     const double tablePrix[33][17] = {
     { 43.77, 47.04, 50.30, 53.57, 56.82, 60.09, 63.36, 66.61, 69.88, 76.69, 76.69, 66.47, 59.90, 54.96, 54.61, 47.83, 41.40 },
@@ -198,7 +189,7 @@ double calcTarif(int poidsTranche, int zone)
     { 67.15, 74.75, 82.36, 89.97, 97.55, 105.15, 112.76, 120.36, 127.96, 135.56, 116.65, 104.13, 93.86, 87.00, 87.36, 75.13, 63.86 }
     };
 
-    prixBase = tablePrix[poidsTranche][zone];
+    prixBase = (tablePrix[poidsTranche][zone] * multiplier + 0.99) * tgo;
 
     return prixBase;
 }
