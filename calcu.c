@@ -46,6 +46,7 @@ int calcPoids(long conv_nbrColis, double *multiplier)
     }
     else
     {
+      poidsReel = ceil(poidsReel);
       *multiplier = 1;
     }
 
