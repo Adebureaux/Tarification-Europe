@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1572948685 source:c:\users\ouhabiter2\documents\develop\tarifs\tarification-europe\calcu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"ecriture.h"
+
+1572943167 c:\users\ouhabiter2\documents\develop\tarifs\tarification-europe\ecriture.h
+	<stdio.h>
+
+1572945678 source:c:\users\ouhabiter2\documents\develop\tarifs\tarification-europe\ecriture.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1572948256 source:c:\users\ouhabiter2\documents\develop\tarifs\tarification-europe\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ecriture.h"
+	"calcu.h"
+
+1572943167 c:\users\ouhabiter2\documents\develop\tarifs\tarification-europe\calcu.h
+

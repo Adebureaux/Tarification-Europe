@@ -189,7 +189,7 @@ double calcTarif(int poidsTranche, int zone, double multiplier)
     { 67.15, 74.75, 82.36, 89.97, 97.55, 105.15, 112.76, 120.36, 127.96, 135.56, 116.65, 104.13, 93.86, 87.00, 87.36, 75.13, 63.86 }
     };
 
-    prixBase = (tablePrix[poidsTranche][zone] * multiplier + 0.99) * tgo;
+    prixBase = (tablePrix[zone][poidsTranche] * multiplier + 0.99) * tgo;
 
     return prixBase;
 }
