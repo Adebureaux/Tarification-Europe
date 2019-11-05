@@ -17,13 +17,13 @@ int calcPoids(long conv_nbrColis, double *multiplier)
             printf("\nColis %ld\n", compteur);
         }
         printf("Longueur (cm) : ");
-        conv_longu = lire(longu, 4, 1);
+        conv_longu = lire(longu, 4, 2);
         printf("Largeur (cm) : ");
-        conv_larg = lire(larg, 4, 1);
+        conv_larg = lire(larg, 4, 2);
         printf("Hauteur (cm) : ");
-        conv_haut = lire(haut, 4, 1);
+        conv_haut = lire(haut, 4, 2);
         printf("Poids (kg) : ");
-        conv_poids = lire(poids, 5, 1);
+        conv_poids = lire(poids, 5, 2);
         compteur++;
         poidsVolume = (((conv_longu/100.00)*(conv_larg/100.00)*(conv_haut/100.00))*250.00);
         if (conv_poids < poidsVolume)
