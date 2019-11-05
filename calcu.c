@@ -130,7 +130,7 @@ int calcPoids(long conv_nbrColis, double *multiplier)
     return tranchePoids;
 }
 
-int calcZone(char *pays[1])
+int calcZone(char pays[1][0])
 {
   int zone = -1;
   int i = 0;
