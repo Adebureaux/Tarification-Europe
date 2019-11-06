@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 
     // Tranche poids et poids
     printf("Nombre de colis : ");
-    conv_nbrColis = lire(nbrColis, 3, 0);
+    conv_nbrColis = lire(nbrColis, 3, 1);
     poidsTranche = calcPoids(conv_nbrColis, &multiplier);
     printf("Multiplier %f\n", multiplier);
 
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
     printf("Marge : %.0lf%%\n\n", marge);
 
     printf("Voulez-vous continuer ? 1 -> OUI 0 -> NON : ");
-    conv_run = lire(run, 2, 0);
+    conv_run = lire(run, 2, 1);
     printf("\n\n\n\n\n");
   } while (conv_run);
       return 0;

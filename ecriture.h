@@ -11,6 +11,6 @@
 
 #include <stdio.h>
 
-long lire(char *chaine, int longueur, int varDouble);
+long lire(char *chaine, int longueur, int var);
 
 #endif /* ecriture_h */
