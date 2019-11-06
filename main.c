@@ -42,7 +42,6 @@ int main(int argc, char *argv[])
     printf("Nombre de colis : ");
     conv_nbrColis = lire(nbrColis, 3, 1);
     poidsTranche = calcPoids(conv_nbrColis, &multiplier);
-    printf("Multiplier %f\n", multiplier);
 
     // Calcul du tarif
     prixBase = calcTarif(poidsTranche, zone, multiplier);

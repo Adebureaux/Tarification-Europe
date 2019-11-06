@@ -39,7 +39,6 @@ long lire(char *chaine, int longueur, int var)
         {
             viderBuffer();
         }
-<<<<<<< HEAD
 
         if (var == 2) // Double
         {
@@ -50,7 +49,6 @@ long lire(char *chaine, int longueur, int var)
           return strtol(chaine, NULL, 10);
         }
         else // Nothing
-=======
         if (var == 2)
         {
           return strtod(chaine, NULL);
@@ -60,7 +58,6 @@ long lire(char *chaine, int longueur, int var)
           return strtol(chaine, NULL, 10);
         }
         else
->>>>>>> f3bc0657825c66cca9375a2400bd28ad80f57077
         {
           return 0;
         }
