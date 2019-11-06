@@ -25,8 +25,6 @@ long lire(char *chaine, int longueur, int var)
 {
     char *positionEntree = NULL;
     int i = 0;
-
-
     if (fgets(chaine, longueur, stdin) != NULL)
     {
         for (i = 0; chaine[i]; ++i) // Remplace chaque carractère miniscule par une majuscule.
@@ -41,6 +39,16 @@ long lire(char *chaine, int longueur, int var)
         {
             viderBuffer();
         }
+
+        if (var == 2) // Double
+        {
+          return strtod(chaine, NULL);
+        }
+        else if (var == 1) // Long
+        {
+          return strtol(chaine, NULL, 10);
+        }
+        else // Nothing
         if (var == 2)
         {
           return strtod(chaine, NULL);

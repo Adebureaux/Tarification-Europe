@@ -36,7 +36,6 @@ int calcPoids(long conv_nbrColis, double *multiplier)
         }
     } while (conv_nbrColis >= compteur);
 
-    printf("Var poids reel %f\n", poidsReel);
 
     if (poidsReel > 100)
     {
@@ -49,9 +48,6 @@ int calcPoids(long conv_nbrColis, double *multiplier)
       poidsReel = ceil(poidsReel);
       *multiplier = 1;
     }
-
-
-    printf("Var poids reel %f\n", poidsReel);
 
     // Definition de la tranche de poids
     if (poidsReel >= 0 && poidsReel <= 9)
@@ -127,7 +123,6 @@ int calcPoids(long conv_nbrColis, double *multiplier)
         printf("Erreur sur le poids.\n");
         return 0;
     }
-    printf("Tranche poids %d\n", tranchePoids); // A delete
     return tranchePoids;
 }
 
@@ -145,7 +140,7 @@ int calcZone(char pays[1][0])
   }
   if (zone <= -1)
   {
-    printf("Erreur dans la saisie du code pays, veuillez saisir les 3 premieres lettres.\n");
+    printf("Erreur dans la saisie, veuillez saisir les 3 premieres lettres du pays.\n");
   }
   return zone;
 }
