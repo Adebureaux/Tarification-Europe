@@ -36,12 +36,16 @@ int calcPoids(long conv_nbrColis, double *multiplier)
         }
     } while (conv_nbrColis >= compteur);
 
+    printf("%f\n", poidsReel);
+
 
     if (poidsReel > 100)
     {
       tempPoids = ceil(poidsReel / 10.00);
-      poidsReel = tempPoids * 10;
+      poidsReel = tempPoids * 10.00;
       *multiplier =  tempPoids / 10.00;
+      printf("%f\n", *multiplier);
+      printf("%f\n", poidsReel);
     }
     else
     {
@@ -90,31 +94,31 @@ int calcPoids(long conv_nbrColis, double *multiplier)
     {
         tranchePoids = 9;
     }
-    else if (poidsReel > 99 && poidsReel <= 200)
+    else if (poidsReel > 99 && poidsReel <= 199)
     {
         tranchePoids = 10;
     }
-    else if (poidsReel > 200 && poidsReel <= 300)
+    else if (poidsReel > 199 && poidsReel <= 299)
     {
         tranchePoids = 11;
     }
-    else if (poidsReel > 300 && poidsReel <= 400)
+    else if (poidsReel > 299 && poidsReel <= 399)
     {
         tranchePoids = 12;
     }
-    else if (poidsReel > 400 && poidsReel <= 500)
+    else if (poidsReel > 399 && poidsReel <= 499)
     {
         tranchePoids = 13;
     }
-    else if (poidsReel > 500 && poidsReel <= 1000)
+    else if (poidsReel > 499 && poidsReel <= 999)
     {
         tranchePoids = 14;
     }
-    else if (poidsReel > 1000 && poidsReel <= 2000)
+    else if (poidsReel > 999 && poidsReel <= 1999)
     {
         tranchePoids = 15;
     }
-    else if (poidsReel > 2000)
+    else if (poidsReel > 1999)
     {
         tranchePoids = 16;
     }
