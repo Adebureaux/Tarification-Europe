@@ -36,16 +36,11 @@ int calcPoids(long conv_nbrColis, double *multiplier)
         }
     } while (conv_nbrColis >= compteur);
 
-    printf("%f\n", poidsReel);
-
-
     if (poidsReel > 100)
     {
       tempPoids = ceil(poidsReel / 10.00);
       poidsReel = tempPoids * 10.00;
       *multiplier =  tempPoids / 10.00;
-      printf("%f\n", *multiplier);
-      printf("%f\n", poidsReel);
     }
     else
     {
